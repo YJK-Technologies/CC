@@ -55,7 +55,7 @@ jobs:
         shell: powershell
         run: |
           $src = "$env:GITHUB_WORKSPACE\backend"
-          $dest = "C:\inetpub\wwwroot\CC - Updated\server"
+          $dest = "C:\inetpub\wwwroot\CC_Updated\server"
 
           if (!(Test-Path $src)) {
             Write-Error "Backend source folder not found: $src"
@@ -71,7 +71,7 @@ jobs:
       - name: Install backend dependencies
         shell: powershell
         run: |
-          cd C:\inetpub\wwwroot\CC - Updated\server
+          cd C:\inetpub\wwwroot\CC_Updated\server
           if (Test-Path node_modules) {
             Remove-Item -Recurse -Force node_modules
           }
@@ -86,7 +86,7 @@ jobs:
       #     if (pm2 list | Select-String "CC") {
       #       pm2 restart CC
       #     } else {
-      #       pm2 start C:\inetpub\wwwroot\CC - Updated\server\https.js --name CC
+      #       pm2 start C:\inetpub\wwwroot\CC_Updated\server\https.js --name CC
       #     }
       #     pm2 save
 
@@ -96,8 +96,8 @@ jobs:
           $serviceName = "CC"
           $nssm = "C:\Windows\System32\nssm.exe"
           $node = "C:\Program Files\nodejs\node.exe"
-          $app = "C:\inetpub\wwwroot\CC - Updated\server\https.js"
-          $appDir = "C:\inetpub\wwwroot\CC - Updated\server"
+          $app = "C:\inetpub\wwwroot\CC_Updated\server\https.js"
+          $appDir = "C:\inetpub\wwwroot\CC_Updated\server"
 
           if (Get-Service -Name $serviceName -ErrorAction SilentlyContinue) {
               Write-Host "Service exists. Restarting..."
@@ -142,7 +142,7 @@ jobs:
       - name: Deploy frontend to IIS
         shell: powershell
         run: |
-          robocopy build C:\inetpub\wwwroot\CC - Updated\build /MIR /XF web.config
+          robocopy build C:\inetpub\wwwroot\CC_Updated\build /MIR /XF web.config
           if ($LASTEXITCODE -le 7) { exit 0 } else { exit $LASTEXITCODE }
 
       # -------------------------------------------------
