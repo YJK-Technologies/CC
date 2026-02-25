@@ -142,7 +142,7 @@ jobs:
       - name: Deploy frontend to IIS
         shell: powershell
         run: |
-          robocopy build C:\inetpub\wwwroot\CC_Updated\build /MIR /XF web.config
+          robocopy dist C:\inetpub\wwwroot\CC_Updated\build /MIR /XF web.config
           if ($LASTEXITCODE -le 7) { exit 0 } else { exit $LASTEXITCODE }
 
       # -------------------------------------------------
