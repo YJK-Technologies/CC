@@ -1,0 +1,19 @@
+
+version: '3.8'
+
+services:
+  citycool-web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - citycool-network
+
+networks:
+  citycool-network:
+    driver: bridge
